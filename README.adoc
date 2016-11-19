@@ -3,7 +3,7 @@
 :version: 0.3.0
 
 image:https://travis-ci.org/GoodGrind/ghostwriter-api.svg?branch=master["Build Status", link="https://travis-ci.org/GoodGrind/ghostwriter-api"]
-image:https://api.codacy.com/project/badge/Grade/ced3cbe5b44d4f5bbae39140913a69a4["Codacy Badge", link="https://www.codacy.com/app/snorbi07/ghostwriter-api"]
+image:https://api.codacy.com/project/badge/Grade/e3a670f747da4fc5927fa03703f89ff4["Codacy code quality", link="https://www.codacy.com/app/snorbi07/ghostwriter-api?utm_source=github.com&utm_medium=referral&utm_content=GoodGrind/ghostwriter-api&utm_campaign=Badge_Grade"]
 image:https://maven-badges.herokuapp.com/maven-central/io.ghostwriter/ghostwriter-api-java/badge.svg["Maven Central", link="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22io.ghostwriter%22%20v%3A{version}"]
 image:https://img.shields.io/badge/license-LGPLv2.1-blue.svg?style=flat["License", link="http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html"]
 
