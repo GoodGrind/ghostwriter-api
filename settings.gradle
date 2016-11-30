@@ -1,3 +1,3 @@
 include 'ghostwriter-api-java'
 
-rootProject.name = 'ghostwriter'
+rootProject.name = 'ghostwriter-api'
