@@ -1,6 +1,8 @@
 package io.ghostwriter;
 
 import java.util.ServiceLoader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author ghostwriter.io
@@ -9,7 +11,21 @@ public enum GhostWriter {
 
     INSTANCE;
 
-    private static io.ghostwriter.TracerProvider<? extends Tracer> tracerProvider = initialize();
+    private static Logger LOG = Logger.getLogger(GhostWriter.class.getName());
+
+    private static io.ghostwriter.TracerProvider<? extends Tracer> tracerProvider;
+
+    static {
+        final String ENV_GHOSTWRITER_VERBOSE = "GHOSTWRITER_VERBOSE";
+        final String verboseEnv = System.getenv(ENV_GHOSTWRITER_VERBOSE);
+        final boolean isVerbose = Boolean.parseBoolean(verboseEnv);
+
+        if (!isVerbose) {
+            LOG.setLevel(Level.OFF);
+        }
+
+        tracerProvider = initialize();
+    }
 
     public static void setTracerProvider(TracerProvider<? extends Tracer> tp) {
         if (tp == null) {
@@ -17,8 +33,7 @@ public enum GhostWriter {
         }
         Tracer tracer = tp.getTracer();
         INSTANCE.tracerProvider = tp;
-        // FIXME (snorbi07): this should be enabled using a DEBUG environmental variable or something
-        System.out.println("GWRT: Initialized with Tracer implementation: " + tracer.getClass().getCanonicalName());
+        LOG.info(GhostWriter.class.getName() + " - initialized with implementation: " + tracer.getClass().getCanonicalName());
     }
 
     public static void entering(Object source, String method, Object... params) {
@@ -63,14 +78,12 @@ public enum GhostWriter {
                     && tracer != null) {
 
                 foundProv = tracerProvider;
-//                FIXME (snorbi07): this should be enabled using a DEBUG environmental variable or something
-                System.out.println("GWRT: Initialized with Tracer implementation: " + tracer.getClass().getCanonicalName());
-
-            } else if (tracer != null) {
-//                FIXME (snorbi07): this should be enabled using a DEBUG environmental variable or something
-                System.out.println("GWRT: Found other tracer implementation: "
+                LOG.info(GhostWriter.class.getName() + " - initialized with implementation: "
                         + tracer.getClass().getCanonicalName());
 
+            } else if (tracer != null) {
+                LOG.info(GhostWriter.class.getName() + " - initialized with implementation: "
+                        + tracer.getClass().getCanonicalName());
             }
         }
 
@@ -78,7 +91,7 @@ public enum GhostWriter {
             return foundProv;
         }
 
-        System.out.println("GWRT: Using the default no-op implementation!");
+        LOG.info(GhostWriter.class.getName() + " - using the default no-op implementation!");
         return new NoopTracerProvider();
     }
 
