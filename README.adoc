@@ -1,6 +1,6 @@
 = GhostWriter
 
-:version: 0.3.1
+:version: 0.4.0
 
 image:https://travis-ci.org/GoodGrind/ghostwriter-api.svg?branch=master["Build Status", link="https://travis-ci.org/GoodGrind/ghostwriter-api"]
 image:https://api.codacy.com/project/badge/Grade/e3a670f747da4fc5927fa03703f89ff4["Codacy code quality", link="https://www.codacy.com/app/snorbi07/ghostwriter-api?utm_source=github.com&utm_medium=referral&utm_content=GoodGrind/ghostwriter-api&utm_campaign=Badge_Grade"]
