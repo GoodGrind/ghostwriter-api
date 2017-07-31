@@ -9,10 +9,49 @@ image:https://img.shields.io/badge/license-LGPLv2.1-blue.svg?style=flat["License
 
 
 == About
-The _ghostwriter-api_ provides a set of callbacks that get executed for specific events triggered by your application, such as:
 
+In a sentence, _ghostwriter-api_ is the bridge between the compile-time and the runtime part of http://ghostwriter.io[Ghostwriter]. It does the bridging using a set of callbacks that get executed for specific events triggered by your application, where the compile-time part makes sure that the callbacks are called at the right time (by instrumenting the API calls into your code), while the runtime part does the actual handling of the data.
+
+The _ghostwriter-api_ module does the loading of various handlers (runtime components) using a https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html[ServiceLoader]. Meaning that if you put a specific runtime JAR on the classpath it will be loaded and used for handling the events.
+
+*Important*: only single runtime module can be loaded. 
+
+
+== Configuration API
+
+There are situations, where relying on the classpath and ServiceLoader to use the correct runtime module is not enough. For example, you might be working on a web application where you want to be able to switch from one solution to another with the push of a button. Switching runtime modules is possible manually as well through the provided API.
+
+[source, java]
+----
+io.ghostwriter.GhostWriter.setTracerProvider(...)
+----
+
+For example, for setting _ghostwriter-tracer_ as the runtime handler run the following code:
+
+[source, java]
+----
+final GhostWriterTracerProvider tracerProvider = new GhostWriterTracerProvider();
+GhostWriter.setTracerProvider(tracerProvider);
+----
+
+The above example assumes that you have _ghostwriter-api_ and _ghostwriter-tracer_ JARs specified as dependencies of your application.
+
+
+== Providing your own runtime handlers
+
+For creating your own runtime implementations, you need to implement the provided _io.ghostwriter.Tracer_ interface, that provides callbacks for handling events, such as:
 * calling a function or procedure
 * assignment to a field or variable
 * returning a value from a function
 * exiting a function or procedure
 * unexpected error occurred
+
+The instance of your handler is created through a factory that you need to provide by implementing the _io.ghostwriter.TracerProvider_ interface.
+
+For details, refer to the provided JavaDoc's of the interfaces.
+
+Before you start using your own runtime implementation, you need to package it into a standalone JAR, that conforms to the https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html[ServiceLoader] requirements. A service provider is identified by placing a provider-configuration file in the resource directory _META-INF/services_.
+
+For a GhostWriter runtime implementation, this means having a file called _io.ghostwriter.TracerProvider in your  _src/main/META-INF/services_ folder,  with the fully qualified name of your _TracerProvider_ implementation. 
+
+For a working example, check one of the provided runtime implementations, such as the https://github.com/GoodGrind/ghostwriter-tracer[ghostwriter-tracer].
