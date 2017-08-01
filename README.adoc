@@ -17,7 +17,7 @@ The _ghostwriter-api_ module does the loading of various handlers (runtime compo
 *Important*: only single runtime module can be loaded. 
 
 
-== Configuration API
+== Configuration
 
 There are situations, where relying on the classpath and ServiceLoader to use the correct runtime module is not enough. For example, you might be working on a web application where you want to be able to switch from one solution to another with the push of a button. Switching runtime modules is possible manually as well through the provided API.
 
@@ -36,6 +36,16 @@ GhostWriter.setTracerProvider(tracerProvider);
 
 The above example assumes that you have _ghostwriter-api_ and _ghostwriter-tracer_ JARs specified as dependencies of your application.
 
+
+=== Debugging
+
+In case you want to get feedback about the module loading process of GhostWriter you need to enable the verbose logging by setting the _GHOSTWRITER_VERBOSE_ environmental property to _true_.
+
+----
+export GHOSTWRITER_VERBOSE=true
+----
+
+After starting you application with the correct environmental value settings _ghostwriter-api_ will output the logging information using https://docs.oracle.com/javase/8/docs/api/java/util/logging/package-summary.html[JUL.]
 
 == Providing your own runtime handlers
 
