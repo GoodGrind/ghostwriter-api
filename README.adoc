@@ -63,6 +63,6 @@ For details, refer to the provided JavaDoc's of the interfaces.
 
 Before you start using your own runtime implementation, you need to package it into a standalone JAR, that conforms to the https://docs.oracle.com/javase/7/docs/api/java/util/ServiceLoader.html[ServiceLoader] requirements. A service provider is identified by placing a provider-configuration file in the resource directory _META-INF/services_.
 
-For a GhostWriter runtime implementation, this means having a file called _io.ghostwriter.TracerProvider in your  _src/main/META-INF/services_ folder,  with the fully qualified name of your _TracerProvider_ implementation. 
+For a GhostWriter runtime implementation, this means having a file called _io.ghostwriter.TracerProvider in your  _src/main/META-INF/services_ folder, where the contents of the file correspond to the fully qualified name of your _TracerProvider_ implementation. 
 
 For a working example, check one of the provided runtime implementations, such as the https://github.com/GoodGrind/ghostwriter-tracer[ghostwriter-tracer].
