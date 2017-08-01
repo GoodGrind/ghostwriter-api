@@ -50,6 +50,7 @@ After starting you application with the correct environmental value settings _gh
 == Providing your own runtime handlers
 
 For creating your own runtime implementations, you need to implement the provided _io.ghostwriter.Tracer_ interface, that provides callbacks for handling events, such as:
+
 * calling a function or procedure
 * assignment to a field or variable
 * returning a value from a function
