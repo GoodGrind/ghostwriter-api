@@ -70,7 +70,7 @@ public enum GhostWriter {
     @SuppressWarnings({"rawtypes"})
     private static TracerProvider<?> initialize() {
         TracerProvider foundProv = null;
-        ServiceLoader<TracerProvider> serviceLoader = ServiceLoader.load(TracerProvider.class);
+        ServiceLoader<TracerProvider> serviceLoader = ServiceLoader.load(TracerProvider.class, GhostWriter.class.getClassLoader());
         for (TracerProvider tracerProvider : serviceLoader) {
             Tracer tracer = tracerProvider.getTracer();
             if (foundProv == null
