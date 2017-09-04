@@ -13,7 +13,7 @@ allprojects {
     version = "0.4.0"
 
     // Maven central related properties
-    ext.doUploadToSonatype = false // can be used at a later stage to disable/enable uploading to Maven Central staging
+    ext.doUploadToSonatype = "$System.env.RELEASE" ? true : false
     ext.sonatypeUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
     ext.sonatypeUserName = project.hasProperty("sonatypeUserName") ? sonatypeUserName : ""
     ext.sonatypePassword = project.hasProperty("sonatypePassword") ? sonatypePassword : ""

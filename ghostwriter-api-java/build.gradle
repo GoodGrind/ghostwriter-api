@@ -34,6 +34,7 @@ uploadArchives {
             repository(url: mavenLocal().url)
 
             if (project.ext.doUploadToSonatype) {
+                logger.info("Publishing version '$version' to Maven Central")
                 repository(url: project.ext.sonatypeUrl) {
                     authentication(userName: project.ext.sonatypeUserName, password: project.ext.sonatypePassword)
                 }
