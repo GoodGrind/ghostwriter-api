@@ -62,11 +62,6 @@ public enum GhostWriter {
         tracer.onError(source, method, error);
     }
 
-    public static void timeout(Object source, String method, long timeoutThreshold, long timeout) {
-        Tracer tracer = INSTANCE.tracerProvider.getTracer();
-        tracer.timeout(source, method, timeoutThreshold, timeout);
-    }
-
     @SuppressWarnings({"rawtypes"})
     private static TracerProvider<?> initialize() {
         TracerProvider foundProv = null;

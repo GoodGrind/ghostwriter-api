@@ -27,9 +27,4 @@ public class NoopTracer implements Tracer {
         // NOOP
     }
 
-    @Override
-    public void timeout(Object source, String method, long timeoutThreshold, long timeout) {
-        // NOOP
-    }
-
 }
