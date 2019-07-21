@@ -54,15 +54,4 @@ public interface Tracer {
      */
     void onError(Object source, String method, Throwable error);
 
-    /**
-     * Triggered when the time between the entering and exiting events exceeds a certain amount of time in milliseconds.
-     * This is an opt-in feature, that is enabled by annotating the methods that need to be watched.
-     *
-     * @param source The object triggering the event
-     * @param method The method name, where the timeout event happened
-     * @param timeoutThreshold Threshold value for the current method
-     * @param timeout The timeout value in milliseconds that triggered the event. This is always larger than the threshold value.
-     */
-    void timeout(Object source, String method, long timeoutThreshold, long timeout);
-
 }

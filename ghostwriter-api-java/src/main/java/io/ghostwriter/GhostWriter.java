@@ -36,35 +36,29 @@ public enum GhostWriter {
         LOG.info(GhostWriter.class.getName() + " - initialized with implementation: " + tracer.getClass().getCanonicalName());
     }
 
-    public static void entering(Object source, String method, Object... params) {
+    static void entering(Object source, String method, Object... params) {
         Tracer tracer = INSTANCE.tracerProvider.getTracer();
         tracer.entering(source, method, params);
     }
 
-    public static Object returning(Object source, String method, Object returnValue) {
+    static void returning(Object source, String method, Object returnValue) {
         Tracer tracer = INSTANCE.tracerProvider.getTracer();
         tracer.returning(source, method, returnValue);
-        return returnValue;
     }
 
-    public static void exiting(Object source, String method) {
+    static void exiting(Object source, String method) {
         Tracer tracer = INSTANCE.tracerProvider.getTracer();
         tracer.exiting(source, method);
     }
 
-    public static void valueChange(Object source, String method, String variable, Object value) {
+    static void valueChange(Object source, String method, String variable, Object value) {
         Tracer tracer = INSTANCE.tracerProvider.getTracer();
         tracer.valueChange(source, method, variable, value);
     }
 
-    public static void onError(Object source, String method, Throwable error) {
+    static void onError(Object source, String method, Throwable error) {
         Tracer tracer = INSTANCE.tracerProvider.getTracer();
         tracer.onError(source, method, error);
-    }
-
-    public static void timeout(Object source, String method, long timeoutThreshold, long timeout) {
-        Tracer tracer = INSTANCE.tracerProvider.getTracer();
-        tracer.timeout(source, method, timeoutThreshold, timeout);
     }
 
     @SuppressWarnings({"rawtypes"})
